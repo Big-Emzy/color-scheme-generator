@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    max-width: 550px;
+    margin: auto;
+}
+
+#color-Selection-Pane {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 27px 19px;
+    border: 1px solid black;
+}
+
+#theme-logo {
+    width: 51px;
+    height: 34px;
+    border: 0.5px solid #313131;
+    background: #F55A5A;
+}
