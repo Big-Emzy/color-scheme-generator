@@ -1,26 +1,26 @@
-
-
-const hex = document.getElementById('theme-logo')
+    
 let colorOutline = []
 let revealColors = ''
 
+const selectTheme = document.getElementById('colors')
+
 document.getElementById('btn').addEventListener('click', function(){
-    const hex = document.getElementById('theme-logo')
-    const selectTheme = document.getElementById('select')
-        fetch(`https://www.thecolorapi.com/scheme?hex=${hex.value}mode=${selectTheme.value}&count=6`, {
-            method: "GET"
+    const hex = document.querySelector('#theme-logo')
+    const trimedHex = hex.value.slice(1)
+        fetch(`https://www.thecolorapi.com/scheme?hex=${trimedHex.toUpperCase()}&mode=${selectTheme.value}&count=6`, {
+            method: "GET",
         })
             .then(res => res.json())
             .then(data => {
-                 data.colors.forEach(element => {
-                        colorOutline.push(element.hex.value)
+                        data.colors.forEach(element => {
+                            colorOutline.push(element.hex.value)
                     }) 
-                    colorOutline.shift()    
+                    colorOutline.shift()  
                     colorOutline.forEach(colors => {
                     revealColors += `
                             <div class="color-tile">
                                 <div class="color-box" style="background-color: ${colors};"></div>
-                                <div class="color-code">${colors}</div>
+                                <div class="color-code" id="colorCode">${colors}</div>
                             </div>
                     `
                 return revealColors
@@ -30,8 +30,20 @@ document.getElementById('btn').addEventListener('click', function(){
             })
        colorOutline = []     
        revealColors = ''
-       
 
 })
 
-  
+
+document.addEventListener('click', function handleCopy(e) {
+    if (e.target.id === 'colorCode') {
+        const textToCopy = e.target.innerText
+        // copyToClipboard()
+        // console.log(textToCopy)
+        navigator.clipboard.writeText(textToCopy)
+        alert("Copied the text: " + textToCopy)
+    }
+    // console.log(e.target)
+    
+
+})
+
