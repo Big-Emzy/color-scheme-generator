@@ -16,7 +16,7 @@ document.getElementById('btn').addEventListener('click', function(){
                     colorOutline.forEach(colors => {
                     revealColors += `
                             <div class="color-tile">
-                                <div class="color-box" style="background-color: ${colors};"></div>
+                                <div id="colorPlate" class="color-box" style="background-color: ${colors};" data-color="${colors}"></div>
                                 <div class="color-code" id="colorCode">${colors}</div>
                             </div>
                     `
@@ -28,9 +28,14 @@ document.getElementById('btn').addEventListener('click', function(){
        revealColors = ''
 })
 
-document.addEventListener('click', function handleCopy(e) {
+document.addEventListener('click', function(e) {
     if (e.target.id === 'colorCode') {
         const textToCopy = e.target.innerText
+        navigator.clipboard.writeText(textToCopy)
+        alert("Copied the text: " + textToCopy)
+    }
+    if (e.target.id === 'colorPlate') {
+        const textToCopy = e.target.dataset.color
         navigator.clipboard.writeText(textToCopy)
         alert("Copied the text: " + textToCopy)
     }
